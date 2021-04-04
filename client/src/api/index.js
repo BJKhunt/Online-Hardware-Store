@@ -30,4 +30,10 @@ export const deleteProduct = (id) => API.delete(`product/deleteproduct/${id}`);
 export const getInquiry = () => API.get('inquiry/getinquiry');
 export const addInquiry = (inquiryData) => API.post('inquiry/addinquiry', inquiryData);
 
+export const getOrder = () => API.get('order/getorder');
+export const acceptOrder = (id) => API.get(`order/acceptorder/${id}`);
+export const dispatchOrder = (id) => API.get(`order/dispatchorder/${id}`);
+export const declineOrder = (id) => API.delete(`order/declineorder/${id}`);
+export const addOrder = (orderData) => API.post('order/addorder', orderData);
+
 export const addContact = (contactData) => API.post(`/contact`, contactData);

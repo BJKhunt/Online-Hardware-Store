@@ -13,6 +13,7 @@ import { Skeleton } from "@material-ui/lab";
 require("es6-promise").polyfill();
 require("isomorphic-fetch");
 
+var user;
 
 const DataInquiry = () => {
 
@@ -20,11 +21,16 @@ const DataInquiry = () => {
     const [email, setEmail] = useState('');
     const [loading, setLoading] = useState(true)
     let history = useHistory();
-
     useEffect(() => {
         setLoading(true);
-        var user = JSON.parse(localStorage.getItem('profile'));
-        setEmail(user.result.email);
+        user = JSON.parse(localStorage.getItem('profile'));
+        if (user.result.isCompany) {
+            setEmail(user.result.ccontact);
+        }
+        else {
+            setEmail(user.result.email);
+        }
+
         api.getInquiry()
             .then(data => {
                 console.log(data.data);
@@ -65,10 +71,10 @@ const DataInquiry = () => {
         gcontainersubject: {
             paddingLeft: "30px",
             paddingRight: "10px",
-            backgroundColor: "#666666"
+            backgroundColor: "#8c8c8c"
         },
         gcontainerbody: {
-            paddingLeft: "30px",
+            paddingLeft: "22px",
             paddingRight: "10px",
             paddingBottom: "10px",
             paddingTop: "6px",
@@ -97,6 +103,16 @@ const DataInquiry = () => {
         history.push('/');
     }
 
+    function gotoInquiry(row, e) {
+        e.preventDefault();
+        console.log(row);
+        var userid = 'blah';
+        if (user.result.isCompany) {
+            userid = row.inquiryData.from;
+        }
+        history.push({ pathname: `/inquiry/${row.inquiryData.productid}/${userid}`, state: { id: row.inquiryData.productid, userid: userid } });
+    }
+
     return (
         <div>
             { loading ?
@@ -119,26 +135,40 @@ const DataInquiry = () => {
                                     </Typography>
                                 </Grid>
                                 <Grid container spacing={1} className={classes.gcontainerbody} direction="row" justify="flex-start" alignItems="flex-start">
-                                    <Grid item xs={12} sm={12} md={12} className={classes.gcontainer}>
-                                        <Typography variant="body1" className={classes.typoColor} component="div">
-                                            <Box fontWeight={500} fontSize="h6.fontSize">
-                                                Message : {row.inquiryData.message}
-                                            </Box>
-                                        </Typography>
+                                    <Grid item xs={12} sm={9} md={9} className={classes.gcontainer}>
+                                        <Grid container spacing={1} className={classes.gcontainerbody} direction="row" justify="flex-start" alignItems="flex-start">
+                                            <Grid item xs={12} sm={12} md={12} className={classes.gcontainer}>
+                                                <Typography variant="body1" className={classes.typoColor} component="div">
+                                                    <Box fontWeight={500} fontSize="h6.fontSize">
+                                                        Message : {row.inquiryData.message}
+                                                    </Box>
+                                                </Typography>
+                                            </Grid>
+                                            <Grid item xs={12} sm={12} md={12} className={classes.gcontainer}>
+                                                <Typography variant="body1" className={classes.typoColor} component="div">
+                                                    <Box fontWeight={500} fontSize="h6.fontSize">
+                                                        Product:{row.productData.name}
+                                                    </Box>
+                                                </Typography>
+                                            </Grid>
+                                            <Grid item xs={12} sm={12} md={12} className={classes.gcontainer}>
+                                                <Typography variant="body1" className={classes.typoColor} component="div">
+                                                    <Box fontWeight={500} fontSize="h6.fontSize">
+                                                        To : {row.inquiryData.to}
+                                                    </Box>
+                                                </Typography>
+                                            </Grid>
+                                            <Grid item xs={12} sm={12} md={12} className={classes.gcontainer}>
+                                                <Typography variant="body2" className={classes.typoColor} component="div">
+                                                    <Box fontWeight={500} fontSize="body1.fontSize">
+                                                        *{new Date(row.inquiryData.date).toUTCString()}
+                                                    </Box>
+                                                </Typography>
+                                            </Grid>
+                                        </Grid>
                                     </Grid>
-                                    <Grid item xs={12} sm={12} md={12} className={classes.gcontainer}>
-                                        <Typography variant="body1" className={classes.typoColor} component="div">
-                                            <Box fontWeight={500} fontSize="h6.fontSize">
-                                                Product:{row.productData.name}
-                                            </Box>
-                                        </Typography>
-                                    </Grid>
-                                    <Grid item xs={12} sm={12} md={12} className={classes.gcontainer}>
-                                        <Typography variant="body2" className={classes.typoColor} component="div">
-                                            <Box fontWeight={500} fontSize="body1.fontSize">
-                                                *{new Date(row.inquiryData.date).toUTCString()}
-                                            </Box>
-                                        </Typography>
+                                    <Grid item xs={12} sm={3} md={3} className={classes.gcontainer}>
+
                                     </Grid>
                                 </Grid>
                             </Grid>
@@ -152,34 +182,50 @@ const DataInquiry = () => {
                                     </Typography>
                                 </Grid>
                                 <Grid container spacing={1} className={classes.gcontainerbody} direction="row" justify="flex-start" alignItems="flex-start">
-                                    <Grid item xs={12} sm={12} md={12} className={classes.gcontainer}>
-                                        <Typography variant="body1" className={classes.typoColor} component="div" align="right">
-                                            <Box fontWeight={500} fontSize="h6.fontSize">
-                                                Message : {row.inquiryData.message}
-                                            </Box>
-                                        </Typography>
+                                    <Grid item xs={12} sm={3} md={3} className={classes.gcontainer}>
+                                        <Button variant="contained" style={{ width: 250, marginTop: 10 }} fontSize="large" color="secondary" align="center" onClick={(e) => gotoInquiry(row, e)}>Reply to</Button>
                                     </Grid>
-                                    <Grid item xs={12} sm={12} md={12} className={classes.gcontainer}>
-                                        <Typography variant="body1" className={classes.typoColor} component="div" align="right">
-                                            <Box fontWeight={500} fontSize="h6.fontSize">
-                                                Product:{row.productData.name}
-                                            </Box>
-                                        </Typography>
-                                    </Grid>
-                                    <Grid item xs={12} sm={12} md={12} className={classes.gcontainer}>
-                                        <Typography variant="body2" className={classes.typoColor} component="div" align="right">
-                                            <Box fontWeight={500} fontSize="body1.fontSize">
-                                                *{new Date(row.inquiryData.date).toUTCString()}
-                                            </Box>
-                                        </Typography>
+                                    <Grid item xs={12} sm={9} md={9} className={classes.gcontainer}>
+                                        <Grid container spacing={1} className={classes.gcontainerbody} direction="row" justify="flex-start" alignItems="flex-start">
+                                            <Grid item xs={12} sm={12} md={12} className={classes.gcontainer}>
+                                                <Typography variant="body1" className={classes.typoColor} component="div" align="right">
+                                                    <Box fontWeight={500} fontSize="h6.fontSize">
+                                                        Message : {row.inquiryData.message}
+                                                    </Box>
+                                                </Typography>
+                                            </Grid>
+                                            <Grid item xs={12} sm={12} md={12} className={classes.gcontainer}>
+                                                <Typography variant="body1" className={classes.typoColor} component="div" align="right">
+                                                    <Box fontWeight={500} fontSize="h6.fontSize">
+                                                        Product:{row.productData.name}
+                                                    </Box>
+                                                </Typography>
+                                            </Grid>
+                                            <Grid item xs={12} sm={12} md={12} className={classes.gcontainer}>
+                                                <Typography variant="body1" className={classes.typoColor} component="div" align="right">
+                                                    <Box fontWeight={500} fontSize="h6.fontSize">
+                                                        From : {row.inquiryData.from}
+                                                    </Box>
+                                                </Typography>
+                                            </Grid>
+                                            <Grid item xs={12} sm={12} md={12} className={classes.gcontainer}>
+                                                <Typography variant="body2" className={classes.typoColor} component="div" align="right">
+                                                    <Box fontWeight={500} fontSize="body1.fontSize">
+                                                        *{new Date(row.inquiryData.date).toUTCString()}
+                                                    </Box>
+                                                </Typography>
+                                            </Grid>
+                                        </Grid>
                                     </Grid>
                                 </Grid>
                             </Grid>
+
                     }
                     </div>
-                    )}
-                </Container>}
-        </div>
+                    )
+                    }
+                </Container >}
+        </div >
 
     );
 };

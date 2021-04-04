@@ -120,6 +120,16 @@ const Seller = () => {
         history.push('/productform');
     }
 
+    function gotoOrders(e) {
+        e.preventDefault();
+        history.push('/orders');
+    }
+
+    function gotoInquiries(e) {
+        e.preventDefault();
+        history.push('/inquiries');
+    }
+
     return (
         <div>
             {
@@ -128,11 +138,17 @@ const Seller = () => {
                     :
                     <Container maxWidth="lg">
                         <Grid container spacing={1} direction="row" justify="flex-start" alignItems="flex-start">
-                            <Grid item xs={12} sm={4} md={4} className={classes.gcontainer}>
+                            <Grid item xs={12} sm={3} md={3} className={classes.gcontainer}>
                                 <Button variant="outlined" style={{ width: 120, marginTop: 10 }} fontSize="medium" color="inherit" startIcon={<ArrowBack style={{ fontSize: 30 }} />} onClick={(e) => handleClick(e)} backgroundcolor="gray">Back</Button>
                             </Grid>
-                            <Grid item xs={12} sm={8} md={8} className={classes.gcontainer}>
-                                <Button variant="contained" style={{ width: 300, marginTop: 10 }} fontSize="large" color="secondary" startIcon={<AddCircleOutlineOutlinedIcon />} onClick={(e) => gotoCreate(e)}>Add Product</Button>
+                            <Grid item xs={12} sm={3} md={3} className={classes.gcontainer}>
+                                <Button variant="contained" style={{ width: 250, marginTop: 10 }} fontSize="large" color="secondary" startIcon={<AddCircleOutlineOutlinedIcon />} align="center" onClick={(e) => gotoCreate(e)}>Add Product</Button>
+                            </Grid>
+                            <Grid item xs={12} sm={3} md={3} className={classes.gcontainer}>
+                                <Button variant="contained" style={{ width: 250, marginTop: 10 }} fontSize="large" color="secondary" align="center" onClick={(e) => gotoOrders(e)}>Manage Orders</Button>
+                            </Grid>
+                            <Grid item xs={12} sm={3} md={3} className={classes.gcontainer}>
+                                <Button variant="contained" style={{ width: 250, marginTop: 10 }} fontSize="large" color="secondary" align="center" onClick={(e) => gotoInquiries(e)}>Manage Inquiries</Button>
                             </Grid>
                         </Grid>
                         <hr />

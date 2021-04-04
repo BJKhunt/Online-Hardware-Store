@@ -26,17 +26,36 @@ const Inquiry = () => {
     const classes = useStyles();
 
     useEffect(() => {
-        setFrom(JSON.parse(localStorage.getItem('profile')).result.email);
-        let _id = params.id;
-        console.log(_id);
-        setPid(_id);
-        api.getProductById(_id)
-            .then(data => {
-                console.log(data.data);
-                setName(data.data.productData.name);
-                setTo(data.data.companyData.contact);
-            })
-            .catch(err => console.log(err))
+        var user = JSON.parse(localStorage.getItem('profile'));
+        console.log(user);
+        if (user.result.isCompany) {
+            setFrom(user.result.ccontact);
+            let _id = params.id;
+            console.log(_id);
+            setPid(_id);
+            let _userid = params.userid;
+            setTo(_userid);
+            api.getProductById(_id)
+                .then(data => {
+                    console.log(data.data);
+                    setName(data.data.productData.name);
+                })
+                .catch(err => console.log(err))
+        }
+        else {
+            setFrom(JSON.parse(localStorage.getItem('profile')).result.email);
+            let _id = params.id;
+            console.log(_id);
+            setPid(_id);
+            api.getProductById(_id)
+                .then(data => {
+                    console.log(data.data);
+                    setName(data.data.productData.name);
+                    setTo(data.data.companyData.contact);
+                })
+                .catch(err => console.log(err))
+        }
+
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
@@ -57,7 +76,7 @@ const Inquiry = () => {
                                 setMessage('');
                                 setSubject('');
                                 setPid(''); setName(''); setFrom(''); setTo('');
-                                history.push('/');
+                                history.push('/inquiries');
                             })
                             .catch(err => console.log(err));
                     }
@@ -67,6 +86,7 @@ const Inquiry = () => {
                     onClick: () => {
                         setMessage('');
                         setSubject('');
+                        history.push('/');
                     }
                 }
             ]

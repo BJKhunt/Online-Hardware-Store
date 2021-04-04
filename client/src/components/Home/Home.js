@@ -11,6 +11,8 @@ import QueryBuilderOutlinedIcon from '@material-ui/icons/QueryBuilderOutlined';
 import ShopOutlinedIcon from '@material-ui/icons/ShopOutlined';
 import { Skeleton } from "@material-ui/lab";
 import Admin from '../Admin/Admin';
+import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
+import DraftsOutlinedIcon from '@material-ui/icons/DraftsOutlined';
 
 const Home = () => {
     const [isc, setIsc] = useState(false);
@@ -83,16 +85,19 @@ const Home = () => {
 
     function orderClick(row, e) {
         e.preventDefault();
+        history.push({ pathname: `/orderform/${row._id}`, state: { id: row._id } });
     }
 
     function inquiryClick(row, e) {
         e.preventDefault();
         console.log(row.name);
-        history.push({ pathname: `/inquiry/${row._id}`, state: { id: row._id } });
+        var userid = 'blah';
+        history.push({ pathname: `/inquiry/${row._id}/${userid}`, state: { id: row._id, userid: userid } });
     }
 
     function ordersClick(e) {
         e.preventDefault();
+        history.push(`/orders`);
     }
 
     function inquiriesClick(e) {
@@ -116,13 +121,13 @@ const Home = () => {
                             }
                             {
                                 !disabled ?
-                                    <Button variant="contained" disabled={disabled} className={classes.button} onClick={ordersClick} style={{ width: 300, marginTop: 10 }} fontSize="large" color="secondary">Orders</Button>
+                                    <Button variant="contained" disabled={disabled} className={classes.button} onClick={ordersClick} style={{ width: 300, marginTop: 10 }} fontSize="large" startIcon={<ShoppingCartOutlinedIcon />} color="secondary">Orders</Button>
 
                                     : null
                             }
                             {
                                 !disabled ?
-                                    <Button variant="contained" disabled={disabled} className={classes.button} onClick={inquiriesClick} style={{ width: 300, marginTop: 10 }} fontSize="large" color="secondary">Inquiries</Button>
+                                    <Button variant="contained" disabled={disabled} className={classes.button} onClick={inquiriesClick} style={{ width: 300, marginTop: 10 }} fontSize="large" startIcon={<DraftsOutlinedIcon />} color="secondary">Inquiries</Button>
                                     : null
                             }
 

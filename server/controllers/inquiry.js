@@ -2,6 +2,11 @@ import Inquiry from "../models/inquiry.js";
 import Product from "../models/product.js";
 import User from "../models/user.js";
 import nodemailer from 'nodemailer';
+import Company from "../models/company.js";
+
+import { createRequire } from 'module';
+const require = createRequire(import.meta.url);
+require('dotenv').config();
 
 const EMAIL_ID = process.env.EMAIL_ID;
 const EMAIL_PASSWORD = process.env.EMAIL_PASSWORD;
@@ -9,8 +14,8 @@ const EMAIL_PASSWORD = process.env.EMAIL_PASSWORD;
 var transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-        user: 'spinzastore@gmail.com',
-        pass: 'emailpassword'
+        user: EMAIL_ID,
+        pass: EMAIL_PASSWORD
     }
 });
 
@@ -29,7 +34,7 @@ export const addInquiry = async (req, res) => {
         transporter.sendMail(mailOptions, function (error, info) {
             if (error) {
                 console.log(error);
-                res.status(200).json(data);
+                res.status(200).json({ message: 'Email Sent' });
             } else {
                 console.log('Email sent: ' + info.response);
                 res.status(500).send({ message: error.message || "Error Occured" });
@@ -44,8 +49,16 @@ export const addInquiry = async (req, res) => {
 export const getInquiry = async (req, res) => {
     try {
         const userData = await User.findOne({ _id: req.userId });
-        const fromInquiry = await Inquiry.find({ from: userData.email }).sort({ date: 1 });
-        const toInquiry = await Inquiry.find({ to: userData.email }).sort({ date: 1 });
+        var mailid;
+        if (userData.isCompany) {
+            const companyfinalData = await Company.findOne({ userid: req.userId });
+            mailid = companyfinalData.contact;
+        }
+        else {
+            mailid = userData.email;
+        }
+        const fromInquiry = await Inquiry.find({ from: mailid }).sort({ date: 1 });
+        const toInquiry = await Inquiry.find({ to: mailid }).sort({ date: 1 });
         //console.log(data);
         var finalData = [];
         for (var i in fromInquiry) {

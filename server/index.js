@@ -8,6 +8,7 @@ import productRouter from "./routes/product.js";
 import companyRouter from "./routes/company.js";
 import contactRouter from './routes/contact.js';
 import inquiryRouter from './routes/inquiry.js';
+import orderRouter from './routes/order.js';
 
 import { createRequire } from 'module';
 const require = createRequire(import.meta.url);
@@ -24,6 +25,7 @@ app.use("/product", productRouter);
 app.use("/company", companyRouter);
 app.use("/contact", contactRouter);
 app.use("/inquiry", inquiryRouter);
+app.use("/order", orderRouter);
 
 
 const CONNECTION_URL = 'mongodb://localhost:27017/oosedb';

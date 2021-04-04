@@ -15,6 +15,8 @@ import CompanyForm from './components/CompanyForm/CompanyForm';
 import View from './components/View/View';
 import Inquiry from './components/Inquiry/Inquiry';
 import DataInquiry from './components/DataInquiry/DataInquiry';
+import OrderForm from './components/OrderForm/OrderForm';
+import DataOrder from './components/DataOrder/DataOrder';
 
 const App = () => {
 
@@ -49,7 +51,7 @@ const App = () => {
               <Redirect to="/auth" />
             )
           )} />
-          <Route exact path="/inquiry/:id" render={() => (
+          <Route exact path="/inquiry/:id/:userid" render={() => (
             localStorage.getItem('profile') ? (
               <Inquiry />
             ) : (
@@ -63,9 +65,23 @@ const App = () => {
               <Redirect to="/auth" />
             )
           )} />
+          <Route exact path="/orders" render={() => (
+            localStorage.getItem('profile') ? (
+              <DataOrder />
+            ) : (
+              <Redirect to="/auth" />
+            )
+          )} />
           <Route exact path="/productform" render={() => (
             localStorage.getItem('profile') ? (
               <ProductForm />
+            ) : (
+              <Redirect to="/auth" />
+            )
+          )} />
+          <Route exact path="/orderform/:id" render={() => (
+            localStorage.getItem('profile') ? (
+              <OrderForm />
             ) : (
               <Redirect to="/auth" />
             )

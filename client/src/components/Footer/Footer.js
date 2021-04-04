@@ -32,7 +32,7 @@ const Footer = () => {
               <hr />
               <WhiteTextTypography variant="body2" component="p" fontWeight="fontWeightMedium">
                 
-                  StockWatch is Software that provides  live data of stocks and also past 3 years data. It also contains Charts for better Visualization. It has fundamental data of all companies. You can make trigger for particular stock and when condition satisfies system mails you about that event...
+                  Spinza-Store is Software that provides Solution for who want to sell their Hardware Product to its Customer. Buyer can also make Inquiry which goes to seller and buyer can get quick solution(reply).
                 
               </WhiteTextTypography>
             </CardContent>
@@ -66,7 +66,7 @@ const Footer = () => {
       <hr />
       <Grid container spacing={2} direction="row" justify="flex-start" alignItems="flex-start">
         <Grid item xs={12} sm={6} md={6} className={classes.gcontainer}>
-          <WhiteTextTypography>Copyright © 2021 All Rights Reserved by <strong>StockWatch</strong></WhiteTextTypography>
+          <WhiteTextTypography>Copyright © 2021 All Rights Reserved by <strong>SpinzaStore</strong></WhiteTextTypography>
         </Grid>
         <Grid item xs={12} sm={6} md={6} className={classes.gcontainer}>
           <Clock white />

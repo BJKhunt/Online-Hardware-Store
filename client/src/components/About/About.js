@@ -20,6 +20,8 @@ import {
 const useStyles = makeStyles(theme => ({
   root: {
     maxWidth: 345,
+    alignItems: 'center',
+    align: 'center',
   },
   media: {
     paddingTop: '81.25%',
@@ -60,35 +62,11 @@ const About = () => {
         justify="flex-start"
         alignItems="flex-start"
       >
+        <Grid item xs={12} sm={4} md={4} className={classes.gcontainer}>
 
-        <Grid item xs={12} sm={6} md={6} className={classes.gcontainer}>
-          <Card className={classes.root} style={{ border: "none", boxShadow: "none" }}>
-            <CardMedia
-              className={classes.media}
-              image={Joker}
-              title="Joker"
-            />
-            <CardContent>
-              <Typography gutterBottom variant="h4" component="h1" fontWeight="fontWeightBold">
-                Meet Dobariya
-              </Typography>
-              <Typography variant="body1" component="p">
-                I am Competitive Coder. I love solving Problem. I hate Frontend.
-              </Typography>
-            </CardContent>
-            <CardActions>
-              <Link to={{ pathname: 'https://github.com/Meet35' }} target="_blank" >
-                <GitHubIcon fontSize="large" />
-              </Link>
-              <Link to={{ pathname: 'https://www.linkedin.com/in/meet-dobariya-827b6519a/' }} target="_blank" >
-                <LinkedInIcon fontSize="large" />
-              </Link>
-            </CardActions>
-          </Card>
         </Grid>
-
         <Grid item xs={12} sm={6} md={6} className={classes.gcontainer}>
-          <Card className={classes.root} style={{ border: "none", boxShadow: "none" }}>
+          <Card className={classes.root} style={{ border: "none", boxShadow: "none" }} align="center">
             <CardMedia
               className={classes.media}
               image="https://avatars.githubusercontent.com/u/68754074?s=400&u=37f826742eb8745cceda3f0f5c0f4bac2fad3e6c&v=4"
@@ -111,6 +89,9 @@ const About = () => {
               </Link>
             </CardActions>
           </Card>
+        </Grid>
+        <Grid item xs={12} sm={3} md={3} className={classes.gcontainer}>
+
         </Grid>
       </Grid>
     </div>

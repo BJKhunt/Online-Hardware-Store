@@ -94,11 +94,13 @@ const View = () => {
 
   function orderClick(e) {
     e.preventDefault();
+    history.push({ pathname: `/orderform/${id}`, state: { id: id } });
   }
 
   function inquiryClick(e) {
     e.preventDefault();
-    history.push({ pathname: `/inquiry/${id}`, state: { id: id } });
+    var userid = 'blah';
+    history.push({ pathname: `/inquiry/${id}/${userid}`, state: { id: id, userid: userid } });
   }
 
   return (
