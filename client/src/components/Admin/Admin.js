@@ -20,7 +20,7 @@ const Admin = () => {
     useEffect(() => {
         var data = JSON.parse(localStorage.getItem('profile'));
         console.log(data.result);
-        api.getUnverifiedCompanies()
+        api.getAllCompanies()
             .then(data => {
                 setUser(data.data);
                 console.log(data.data);
@@ -70,7 +70,7 @@ const Admin = () => {
             .then(data => {
                 console.log(data);
                 console.log("its working");
-                api.getUnverifiedCompanies()
+                api.getAllCompanies()
                     .then(data => {
                         setUser(data.data);
                         console.log(data.data);
@@ -82,7 +82,6 @@ const Admin = () => {
 
     return (
         <Container maxWidth="lg">
-            <Button variant="outlined" style={{ width: 120, marginBottom: 12 }} fontSize="medium" color="inherit" startIcon={<ArrowBack style={{ fontSize: 30 }} />} onClick={(e) => handleClick(e)} backgroundcolor="gray">Back</Button>
             {user.map((row, index) =>
                 <Box mb={1} key={index}>
                     <Card className={classes.root} variant="outlined">
@@ -95,9 +94,15 @@ const Admin = () => {
                                 </Typography>
                             }
                             action={
-                                <Button variant="contained" color="secondary" className={classes.button} startIcon={<VerifiedUserOutlinedIcon />} onClick={(e) => approveClick(row, e)}>
-                                    Approve
-                                </Button>
+                                row.isVerified
+                                    ?
+                                    <Button variant="contained" color="inherit" disabled className={classes.button} startIcon={<VerifiedUserOutlinedIcon />} onClick={(e) => approveClick(row, e)}>
+                                        Approved
+                                    </Button>
+                                    :
+                                    <Button variant="contained" color="secondary" className={classes.button} startIcon={<VerifiedUserOutlinedIcon />} onClick={(e) => approveClick(row, e)}>
+                                        Approve
+                                    </Button>
                             }
                         />
                         <CardContent>

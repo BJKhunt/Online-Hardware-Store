@@ -12,6 +12,9 @@ import Clock from './components/Clock/Clock';
 import Seller from './components/Seller/Seller';
 import ProductForm from './components/ProductForm/ProductForm';
 import CompanyForm from './components/CompanyForm/CompanyForm';
+import View from './components/View/View';
+import Inquiry from './components/Inquiry/Inquiry';
+import DataInquiry from './components/DataInquiry/DataInquiry';
 
 const App = () => {
 
@@ -35,6 +38,27 @@ const App = () => {
           <Route exact path="/contact" render={() => (
             localStorage.getItem('profile') ? (
               <Contact />
+            ) : (
+              <Redirect to="/auth" />
+            )
+          )} />
+          <Route exact path="/view/:id" render={() => (
+            localStorage.getItem('profile') ? (
+              <View />
+            ) : (
+              <Redirect to="/auth" />
+            )
+          )} />
+          <Route exact path="/inquiry/:id" render={() => (
+            localStorage.getItem('profile') ? (
+              <Inquiry />
+            ) : (
+              <Redirect to="/auth" />
+            )
+          )} />
+          <Route exact path="/inquiries" render={() => (
+            localStorage.getItem('profile') ? (
+              <DataInquiry />
             ) : (
               <Redirect to="/auth" />
             )

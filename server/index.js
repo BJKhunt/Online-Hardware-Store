@@ -7,6 +7,11 @@ import userRouter from "./routes/user.js";
 import productRouter from "./routes/product.js";
 import companyRouter from "./routes/company.js";
 import contactRouter from './routes/contact.js';
+import inquiryRouter from './routes/inquiry.js';
+
+import { createRequire } from 'module';
+const require = createRequire(import.meta.url);
+require('dotenv').config();
 
 const app = express();
 
@@ -18,6 +23,7 @@ app.use("/user", userRouter);
 app.use("/product", productRouter);
 app.use("/company", companyRouter);
 app.use("/contact", contactRouter);
+app.use("/inquiry", inquiryRouter);
 
 
 const CONNECTION_URL = 'mongodb://localhost:27017/oosedb';

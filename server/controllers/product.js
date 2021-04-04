@@ -1,4 +1,5 @@
 import Product from "../models/product.js";
+import Company from "../models/company.js";
 
 export const getProduct = async (req, res) => {
 
@@ -14,9 +15,10 @@ export const getProduct = async (req, res) => {
 export const getProductById = async (req, res) => {
     const { id } = req.params;
     try {
-        const data = await Product.findOne({ _id: id });
+        const productData = await Product.findOne({ _id: id });
         //console.log(data);
-        res.status(200).json(data);
+        const companyData = await Company.findOne({ _id: productData.companyid });
+        res.status(200).json({ productData, companyData });
     } catch (error) {
         res.status(500).send({ message: error.message || "Error Occured" });
     }

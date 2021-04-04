@@ -69,7 +69,7 @@ const Seller = () => {
             backgroundBlendMode: 'darken',
         },
         conma: {
-            marginBottom: 15,
+            margin: 15,
         },
         typoColor: {
             color: "#000000"
