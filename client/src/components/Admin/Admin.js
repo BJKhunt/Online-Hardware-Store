@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useHistory } from "react-router-dom";
+// import { useHistory } from "react-router-dom";
 import * as api from '../../api/index.js';
-import Autocomplete from '@material-ui/lab/Autocomplete';
-import { Button, Grid, Typography, Container, TextField } from '@material-ui/core';
+// import Autocomplete from '@material-ui/lab/Autocomplete';
+import { Button, Grid, Typography, Container } from '@material-ui/core';
 //import Datatable from '../Datatable/Datatable.js';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
@@ -10,12 +10,12 @@ import CardContent from '@material-ui/core/CardContent';
 import Box from '@material-ui/core/Box';
 import CardHeader from '@material-ui/core/CardHeader';
 import VerifiedUserOutlinedIcon from '@material-ui/icons/VerifiedUserOutlined';
-import { Skeleton } from "@material-ui/lab";
-import ArrowBack from '@material-ui/icons/NavigateBeforeTwoTone';
+// import { Skeleton } from "@material-ui/lab";
+// import ArrowBack from '@material-ui/icons/NavigateBeforeTwoTone';
 
 const Admin = () => {
     const [user, setUser] = useState([]);
-    let history = useHistory();
+    // let history = useHistory();
 
     useEffect(() => {
         var data = JSON.parse(localStorage.getItem('profile'));
@@ -59,10 +59,10 @@ const Admin = () => {
 
     const classes = useStyles();
 
-    function handleClick(e) {
-        e.preventDefault();
-        history.push('/');
-    }
+    // function handleClick(e) {
+    //     e.preventDefault();
+    //     history.push('/');
+    // }
 
     function approveClick(row, e) {
         e.preventDefault();

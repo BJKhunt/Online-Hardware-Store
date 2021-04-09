@@ -4,11 +4,7 @@ import * as api from '../../api/index.js';
 import { Button, Typography, Container, Grid } from '@material-ui/core';
 import ArrowBack from '@material-ui/icons/NavigateBeforeTwoTone';
 import { makeStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
 import Box from '@material-ui/core/Box';
-import CardHeader from '@material-ui/core/CardHeader';
-import DeleteIcon from '@material-ui/icons/Delete';
 import { Skeleton } from "@material-ui/lab";
 require("es6-promise").polyfill();
 require("isomorphic-fetch");
@@ -18,11 +14,11 @@ var user;
 const DataOrder = () => {
 
     const [list, setList] = useState([]);
-    const [email, setEmail] = useState('');
+    // const [email, setEmail] = useState('');
     const [loading, setLoading] = useState(true)
     let history = useHistory();
     const [show, setShow] = useState(false);
-    const [disabled, setDisabled] = useState(false);
+    // const [disabled, setDisabled] = useState(false);
 
     useEffect(() => {
         setLoading(true);
@@ -104,6 +100,7 @@ const DataOrder = () => {
     function doOperation(row, e, flag) {
         e.preventDefault();
         console.log(row);
+        // eslint-disable-next-line eqeqeq
         if (row.orderData.status.toLowerCase() == 'pending' && flag) {
             api.acceptOrder(row.orderData._id)
                 .then(data => {
@@ -113,6 +110,7 @@ const DataOrder = () => {
                 })
                 .catch(err => console.log(err))
         }
+        // eslint-disable-next-line eqeqeq
         else if (row.orderData.status.toLowerCase() == 'inprocess' && flag) {
             api.dispatchOrder(row.orderData._id)
                 .then(data => {
@@ -122,6 +120,7 @@ const DataOrder = () => {
                 })
                 .catch(err => console.log(err))
         }
+        // eslint-disable-next-line eqeqeq
         else if (row.orderData.status.toLowerCase() == 'pending' && !flag) {
             api.declineOrder(row.orderData._id)
                 .then(data => {
@@ -131,8 +130,9 @@ const DataOrder = () => {
                 })
                 .catch(err => console.log(err))
         }
+        // eslint-disable-next-line eqeqeq
         else if (row.orderData.status.toLowerCase() == 'dispatched' && flag) {
-            setDisabled(true);
+            // setDisabled(true);
         }
     }
 
@@ -224,9 +224,11 @@ const DataOrder = () => {
                                             : null}
                                     </Grid>
                                     <Grid item xs={12} sm={12} md={12} className={classes.gcontainer}>
-                                        {(show && row.orderData.status.toLowerCase() == 'pending') ?
-                                            <Button variant="contained" style={{ width: 250, marginTop: 10 }} fontSize="large" color="secondary" align="center" onClick={(e) => doOperation(row, e, false)}>Decline</Button>
-                                            : null}
+                                        {
+                                            // eslint-disable-next-line eqeqeq
+                                            (show && row.orderData.status.toLowerCase() == 'pending') ?
+                                                <Button variant="contained" style={{ width: 250, marginTop: 10 }} fontSize="large" color="secondary" align="center" onClick={(e) => doOperation(row, e, false)}>Decline</Button>
+                                                : null}
                                     </Grid>
                                 </Grid>
                             </Grid>

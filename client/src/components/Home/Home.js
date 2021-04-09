@@ -1,15 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useHistory } from "react-router-dom";
 import * as api from '../../api/index.js';
-import Autocomplete from '@material-ui/lab/Autocomplete';
-import { Button, Grid, Typography, Container, TextField, CardMedia } from '@material-ui/core';
+import { Button, Grid, Typography, Container, CardMedia } from '@material-ui/core';
 //import Datatable from '../Datatable/Datatable.js';
 import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
-import DeleteIcon from '@material-ui/icons/Delete';
 import QueryBuilderOutlinedIcon from '@material-ui/icons/QueryBuilderOutlined';
 import ShopOutlinedIcon from '@material-ui/icons/ShopOutlined';
-import { Skeleton } from "@material-ui/lab";
 import Admin from '../Admin/Admin';
 import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
 import DraftsOutlinedIcon from '@material-ui/icons/DraftsOutlined';
@@ -23,16 +20,18 @@ const Home = () => {
 
     useEffect(() => {
         var data = JSON.parse(localStorage.getItem('profile'));
-        console.log(data.result);
-        setIsc(data.result.isCompany);
-        setDisabled(data.result.isCompany);
-        // eslint-disable-next-line eqeqeq
-        if (data.result.email == 'admin@gmail.com') {
-            setIsa(true);
+        if (data != null) {
+            console.log(data.result);
+            setIsc(data.result.isCompany);
+            setDisabled(data.result.isCompany);
+            // eslint-disable-next-line eqeqeq
+            if (data.result.email == 'admin@gmail.com') {
+                setIsa(true);
+            }
+            api.getAllProduct()
+                .then(data => setList(data.data))
+                .catch(err => console.log(err))
         }
-        api.getAllProduct()
-            .then(data => setList(data.data))
-            .catch(err => console.log(err))
     }, [])
 
     const useStyles = makeStyles({

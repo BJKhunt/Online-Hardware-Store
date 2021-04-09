@@ -11,7 +11,7 @@ import Contact from './components/Contact/Contact';
 import Clock from './components/Clock/Clock';
 import Seller from './components/Seller/Seller';
 import ProductForm from './components/ProductForm/ProductForm';
-import CompanyForm from './components/CompanyForm/CompanyForm';
+// import CompanyForm from './components/CompanyForm/CompanyForm';
 import View from './components/View/View';
 import Inquiry from './components/Inquiry/Inquiry';
 import DataInquiry from './components/DataInquiry/DataInquiry';

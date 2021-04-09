@@ -76,7 +76,7 @@ const Inquiry = () => {
                                 setMessage('');
                                 setSubject('');
                                 setPid(''); setName(''); setFrom(''); setTo('');
-                                history.push('/inquiries');
+                                history.push('/');
                             })
                             .catch(err => console.log(err));
                     }

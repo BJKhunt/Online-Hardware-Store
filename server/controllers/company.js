@@ -37,7 +37,7 @@ export const getCompanyById = async (req, res) => {
 export const getAllCompany = async (req, res) => {
 
     try {
-        const data = await Company.find().sort({ date: 1 });
+        const data = await Company.find().sort({ date: -1 });
         //console.log(data);
         res.status(200).json(data);
     } catch (error) {

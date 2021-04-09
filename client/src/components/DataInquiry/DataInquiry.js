@@ -4,11 +4,7 @@ import * as api from '../../api/index.js';
 import { Button, Typography, Container, Grid } from '@material-ui/core';
 import ArrowBack from '@material-ui/icons/NavigateBeforeTwoTone';
 import { makeStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
 import Box from '@material-ui/core/Box';
-import CardHeader from '@material-ui/core/CardHeader';
-import DeleteIcon from '@material-ui/icons/Delete';
 import { Skeleton } from "@material-ui/lab";
 require("es6-promise").polyfill();
 require("isomorphic-fetch");
@@ -125,6 +121,7 @@ const DataInquiry = () => {
                 <Container maxWidth="lg">
                     <Button variant="outlined" style={{ width: 120, marginBottom: 12 }} fontSize="medium" color="inherit" startIcon={<ArrowBack style={{ fontSize: 30 }} />} onClick={(e) => handleClick(e)} backgroundcolor="gray">Back</Button>
                     {list.map((row, index) => <div key={index}>{
+                        // eslint-disable-next-line eqeqeq
                         email == row.inquiryData.from ?
                             <Grid container spacing={1} direction="row" justify="flex-start" alignItems="flex-start" key={index}>
                                 <Grid item xs={12} sm={12} md={12} className={classes.gcontainersubject}>

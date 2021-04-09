@@ -5,7 +5,6 @@ import IconButton from '@material-ui/core/IconButton';
 import Collapse from '@material-ui/core/Collapse';
 import CloseIcon from '@material-ui/icons/Close';
 import { useHistory, useParams } from 'react-router-dom';
-import ContactMailIcon from '@material-ui/icons/ContactMail';
 import ArrowBack from '@material-ui/icons/NavigateBeforeTwoTone';
 import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css

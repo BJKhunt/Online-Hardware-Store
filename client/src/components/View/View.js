@@ -1,20 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useHistory, useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import * as api from '../../api/index.js';
-import Autocomplete from '@material-ui/lab/Autocomplete';
-import { Button, Grid, Typography, Container, TextField, Avatar, Paper, CardMedia } from '@material-ui/core';
+import { Button, Grid, Typography, Container, CardMedia } from '@material-ui/core';
 //import Datatable from '../Datatable/Datatable.js';
 import { makeStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
 import Box from '@material-ui/core/Box';
-import CardHeader from '@material-ui/core/CardHeader';
-import DeleteIcon from '@material-ui/icons/Delete';
-import UpdateOutlinedIcon from '@material-ui/icons/UpdateOutlined';
-import { Skeleton } from "@material-ui/lab";
 import ArrowBack from '@material-ui/icons/NavigateBeforeTwoTone';
-import CompanyForm from '../CompanyForm/CompanyForm';
-import AddCircleOutlineOutlinedIcon from '@material-ui/icons/AddCircleOutlineOutlined';
 import QueryBuilderOutlinedIcon from '@material-ui/icons/QueryBuilderOutlined';
 import ShopOutlinedIcon from '@material-ui/icons/ShopOutlined';
 

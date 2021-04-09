@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Avatar, Button, Paper, Grid, Typography, Container, TextField, Select, MenuItem, Checkbox, Chip, Input } from '@material-ui/core';
+import { Avatar, Button, Paper, Grid, Typography, Container, TextField, Select, MenuItem, Chip, Input } from '@material-ui/core';
 import Alert from '@material-ui/lab/Alert';
 import IconButton from '@material-ui/core/IconButton';
 import Collapse from '@material-ui/core/Collapse';
@@ -62,6 +62,7 @@ const ProductForm = () => {
                                 setSku('');
                                 setFinish('');
                                 setPrice(''); setSize([]);
+                                history.push('/seller');
                             })
                             .catch(err => console.log(err));
                     }
